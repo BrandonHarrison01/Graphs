@@ -21,8 +21,39 @@ world.printRooms()
 
 player = Player("Name", world.startingRoom)
 
+
+
+
+
+
 # Fill this out
+
+import random
+
 traversalPath = []
+rooms_seen = set()
+n = 0
+
+while len(rooms_seen) < len(roomGraph):
+
+    current_room = player.currentRoom.id
+    exits = player.currentRoom.getExits()
+
+    rand = random.randint(0, len(exits) - 1)
+
+    player.travel(exits[rand])
+    traversalPath.append(exits[rand])
+
+    rooms_seen.add(current_room)
+
+    print(current_room, 'room', len(rooms_seen), 'visited', exits, 'get exits')
+
+    n += 1
+
+
+
+
+
 
 
 
@@ -46,10 +77,10 @@ else:
 #######
 # UNCOMMENT TO WALK AROUND
 #######
-# player.currentRoom.printRoomDescription(player)
-# while True:
-#     cmds = input("-> ").lower().split(" ")
-#     if cmds[0] in ["n", "s", "e", "w"]:
-#         player.travel(cmds[0], True)
-#     else:
-#         print("I did not understand that command.")
+player.currentRoom.printRoomDescription(player)
+while True:
+    cmds = input("-> ").lower().split(" ")
+    if cmds[0] in ["n", "s", "e", "w"]:
+        player.travel(cmds[0], True)
+    else:
+        print("I did not understand that command.")
